@@ -10,6 +10,24 @@ import Util from './util'
 
 const Collapse = (($) => {
 
+  /**
+   * ------------------------------------------------------------------------
+   * Initial setting for fixed height accordions
+   * ------------------------------------------------------------------------
+   */
+
+  $('.accordion').each(function(index, acd) {
+    if ($(acd).find('[data-fixedheight]').length && $(acd).find('[data-fixedheight="true"]').length) {
+      var panelHeadingHeight = 0;
+      $(this).children().each(function() {
+        panelHeadingHeight += $(this).find('.card-header').outerHeight(true)
+          + parseInt($(this).css('margin-top')) + parseInt($(this).css('margin-bottom'))
+          + parseInt($(this).css('border-top-width')) + parseInt($(this).css('border-bottom-width'));
+      });
+      $(this).find('.collapse.in').find('.card-block').innerHeight($(this).height() - panelHeadingHeight);
+    }
+    $(acd).removeClass('invisible');
+  });
 
   /**
    * ------------------------------------------------------------------------
@@ -56,7 +74,7 @@ const Collapse = (($) => {
   }
 
   const Selector = {
-    ACTIVES     : '.panel > .in, .panel > .collapsing',
+    ACTIVES     : '.card > .in, .card > .collapsing',
     DATA_TOGGLE : '[data-toggle="collapse"]'
   }
 
@@ -170,7 +188,9 @@ const Collapse = (($) => {
           .addClass(ClassName.COLLAPSE)
           .addClass(ClassName.IN)
 
-        this._element.style[dimension] = ''
+        if (!$(this._element).data('fixedheight')) {
+          this._element.style[dimension] = ''
+        }
 
         this.setTransitioning(false)
 
@@ -185,11 +205,24 @@ const Collapse = (($) => {
       let capitalizedDimension = dimension[0].toUpperCase() + dimension.slice(1)
       let scrollSize           = `scroll${capitalizedDimension}`
 
+      if (this._config.fixedheight) {
+        var cardBlockHeight = 0
+        if (actives) {
+          cardBlockHeight = $(actives).height()
+        } else {
+          var temp = 0
+          $(this._parent).children().each(function() {
+            temp += $(this).outerHeight(true)
+          })
+          cardBlockHeight = $(this._parent).height() - temp
+        }
+      }
+
       $(this._element)
         .one(Util.TRANSITION_END, complete)
         .emulateTransitionEnd(TRANSITION_DURATION)
 
-      this._element.style[dimension] = `${this._element[scrollSize]}px`
+      this._element.style[dimension] = this._config.fixedheight ? cardBlockHeight + 'px' : `${this._element[scrollSize]}px`
     }
 
     hide() {

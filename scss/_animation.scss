@@ -25,3 +25,13 @@
   transition-duration: .35s;
   transition-property: height;
 }
+
+.accordion {
+  .collapse {
+    overflow-y: auto;
+  }
+
+  .collapse.collapsing {
+    overflow-y: hidden;
+  }
+}

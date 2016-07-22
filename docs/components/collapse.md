@@ -82,6 +82,57 @@ Extend the default collapse behavior to create an accordion.
 </div>
 {% endexample %}
 
+## Fixed height accordion example
+
+Expand all the accordion items in fixed height.
+
+{% example html %}
+<div class="accordion invisible" id="fhAccordion" role="tablist" aria-multiselectable="true" style="height:400px;">
+  <div class="card">
+    <div class="card-header" role="tab" id="headingOne2">
+      <h4 class="card-title">
+        <a data-toggle="collapse" data-parent="#fhAccordion" href="#collapseOne2" aria-expanded="true" aria-controls="collapseOne2">
+          Collapsible Group Item #1
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne2" class="collapse in" data-fixedheight="true" role="tabpanel" aria-labelledby="headingOne2">
+      <div class="card-block">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab" id="headingTwo2">
+      <h4 class="card-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#fhAccordion" href="#collapseTwo2" aria-expanded="false" aria-controls="collapseTwo2">
+          Collapsible Group Item #2
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo2" class="collapse" data-fixedheight="true" role="tabpanel" aria-labelledby="headingTwo2">
+      <div class="card-block">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header" role="tab" id="headingThree2">
+      <h4 class="card-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#fhAccordion" href="#collapseThree2" aria-expanded="false" aria-controls="collapseThree2">
+          Collapsible Group Item #3
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree2" class="collapse" data-fixedheight="true" role="tabpanel" aria-labelledby="headingThree2">
+      <div class="card-block">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+      </div>
+    </div>
+  </div>
+</div>
+{% endexample %}
+
 ## Accessibility
 
 Be sure to add `aria-expanded` to the control element. This attribute explicitly defines the current state of the collapsible element to screen readers and similar assistive technologies. If the collapsible element is closed by default, it should have a value of `aria-expanded="false"`. If you've set the collapsible element to be open by default using the `in` class, set `aria-expanded="true"` on the control instead. The plugin will automatically toggle this attribute based on whether or not the collapsible element has been opened or closed.
